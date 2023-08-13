@@ -117,10 +117,7 @@ The JetMET POG recommends a single jet ID for most physics analysess in CMS, whi
 
 ### Applying Jet ID
 
-There are several ways to apply jet ID. In our above exercises, we have run the cuts "on-the-fly" in our python FWLite macro (the first option here). 
-
-
-The Jet ID can be applied as a series of cuts. The following examples use somewhat out of date numbers. See the above link to the JetID twiki for the current numbers. To apply the cuts on pat::Jet (like in miniAOD) in python then you can do:
+There are several ways to apply jet ID. In our above exercises, we have run the cuts "on-the-fly" in our python FWLite macro. The Jet ID can be applied as a series of cuts. The following examples use somewhat out of date numbers. See the above link to the JetID twiki for the current numbers. To apply the cuts on pat::Jet (like in miniAOD) in python then you can do:
 
 <details>
 <summary>

@@ -1,6 +1,6 @@
-# Jet CMS DAS Exercise
+# Jets Exercises
 
-## CMS DAS January  2023
+## HATs 2023
   
 ### Introduction
 This tutorial is intended to provide you with the basic you need in order to deal with jets in your analysis. We start with the basics of what is a jet, how are they reconstructed, what algorithms are used, etc. Then we give examples with scripts on how to access jets and use them in your analysis frameworks, including corrections and systematics. In the second part of the exercise, we examine jet substructure algorithms, which have many uses including identification of hadronic decays of heavy SM particles like top quarks, W, Z, and H bosons, as well as mitigation of pileup and others.
@@ -14,8 +14,8 @@ Open a terminal/console, connect to cmslpc-sl7 and prepare your working area (in
 ```
 kinit username@FNAL.GOV
 ssh -Y username@cmslpc-sl7.fnal.gov
-mkdir JMEDAS2023
-cd JMEDAS2023
+mkdir JMEHATS2023
+cd JMEHATS2023
 
 export SCRAM_ARCH=slc7_amd64_gcc700
 source /cvmfs/cms.cern.ch/cmsset_default.sh
@@ -23,7 +23,7 @@ cmsrel CMSSW_10_6_18
 cd CMSSW_10_6_18/src
 cmsenv
 
-git clone https://github.com/juska/JMEDAS.git Analysis/JMEDAS
+git clone git@github.com:gracecummings/JMEDAS.git Analysis/JMEDAS
 git clone https://github.com/cms-jet/JetToolbox Analysis/JetToolbox -b jetToolbox_102X_v3
 cd Analysis/JMEDAS
 scram b -j 4

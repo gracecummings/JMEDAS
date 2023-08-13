@@ -89,7 +89,7 @@ Try modifying the plotting script to add vertical lines at area values correspon
 </summary>
 The area plot should look like this:
 
-<img src="../notebooks/files/jet_areas.png" width=400px/>
+![area lineup](../notebooks/files/jet_areas.png)
 
 The histograms indeed peak at the expected value of $\pi R^2$. 
 ```

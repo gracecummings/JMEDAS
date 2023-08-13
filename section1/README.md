@@ -104,3 +104,43 @@ line_ak8.Draw()
 ```
 </details>
 
+## Jet ID
+
+n order to avoid using fake jets, which can originate from a hot calorimeter cell or electronic read-out box, we need to require some basic quality criteria for jets. These criteria are collectively called "jet ID". Details on the jet ID for PFJets can be found in the following twiki:
+
+[https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID](https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID)
+
+The JetMET POG recommends a single jet ID for most physics analysess in CMS, which corresponds to what used to be called the tight Jet ID. Some important observations from the above twiki:
+
+- Jet ID is defined for uncorrected jets only. Never apply jet ID on corrected jets. This means that in your analysis you should apply jet ID first, and then apply JECs on those jets that pass jet ID.
+- Jet ID is fully efficient (>99%) for real, high-$p_{\mathrm{T}}$ jets used in most physics analysis. Its background rejection power is similarly high.
+
+### Applying Jet ID
+
+There are several ways to apply jet ID. In our above exercises, we have run the cuts "on-the-fly" in our python FWLite macro (the first option here). 
+
+
+The Jet ID can be applied as a series of cuts. The following examples use somewhat out of date numbers. See the above link to the JetID twiki for the current numbers. To apply the cuts on pat::Jet (like in miniAOD) in python then you can do:
+
+<details>
+<summary>
+    <font color='blue'>Show...</font>
+</summary>
+
+```
+# Apply jet ID to uncorrected jet
+nhf = jet.neutralHadronEnergy() / uncorrJet.E()
+nef = jet.neutralEmEnergy() / uncorrJet.E()
+chf = jet.chargedHadronEnergy() / uncorrJet.E()
+cef = jet.chargedEmEnergy() / uncorrJet.E()
+nconstituents = jet.numberOfDaughters()
+nch = jet.chargedMultiplicity()
+goodJet = 
+  nhf < 0.99 && 
+  nef < 0.99 && 
+  chf > 0.00 && 
+  cef < 0.99 && 
+  nconstituents > 1 && 
+  nch > 0
+```
+</details>

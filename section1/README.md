@@ -25,7 +25,7 @@ Open basics.py with a code editor, such as gedit, emacs, nano or vim, add the ne
 
 ![Basic jet kinematics](../notebooks/files/plots1.png)
 
-## Jet Types and Algorithms
+## Jet Types
 
 The jet algorithms take as input a set of 4-vectors. At CMS, the most popular jet type is the "Particle Flow Jet", which attempts to use the entire detector at once and derive single four-vectors representing specific particles.For this reason it is very comparable (ideally) to clustering generator-level four-vectors also.
 
@@ -62,11 +62,48 @@ python jet_types_and_algorithms.py
 
 Open the produced plot with `evince jet_types_and_algorithms.pdf&`. As you can see, the agreement isn't very good! Can you guess why?
 
-### Jet Clustering Algorithms
+## Jet Clustering Algorithms
 
 The majority of jet algorithms at CMS use a so-called "clustering sequence". This is essentially a pairwise examination of the input four-vectors. If the pair satisfy some criteria, they are merged. The process is repeated until the entire list of constituents is exhausted. In addition, there are several ways to determine the "area" of the jet over which the input constituents lay. This is very important in correcting for pileup, as we will see, because some algorithms tend to "consume" more constituents than others and hence are more susceptible to pileup. Furthermore, the amount of energy that is inside of a jet due to pileup is proportional to the area, so to correct for this effect it is very important to know the jet area.
 
 ![Four different clustering algorithm comparison](../notebooks/files/JHEP04_2008_063.jpg)
 
 Figure: Comparison of jet areas for four different jet algorithms, from "The anti-kt Clustering Algorithm" by Cacciari, Salam, and Soyez [JHEP04, 063 (2008), arXiv:0802.1189].
+
+Some excellent references about jet algorithms can be found here:
+
+- [Toward Jetography](http://arxiv.org/abs/0906.1833) by Gavin Salam.
+- [Jets in Hadron-Hadron Collisions](http://arxiv.org/abs/0712.2447) by Ellis, Huston, Hatakeyama, Loch, and Toennesmann
+- [The Catchment Area of Jets](http://arxiv.org/abs/0802.1188) by Cacciari, Salam, and Soyez.
+- [The anti-kt Clustering Algorithm](http://arxiv.org/abs/0802.1189) by Cacciari, Salam, and Soyez.
+
+### Exercise: Comparing jet areas between AK4 and AK8
+
+Run `python jet_cone_sizes.py` to plot a comparison of the jets areas between AK4 and AK8 jets. A priori, what type of distribution do you expect?
+
+Try modifying the plotting script to add vertical lines at area values corresponding to $\pi R^2$. Do the histogram peaks line up with these values?
+
+<details>
+<summary>
+    <font color='blue'>Show answer...</font>
+</summary>
+The area plot should look like this:
+
+<img src="../notebooks/files/jet_areas.png" width=400px/>
+
+The histograms indeed peak at the expected value of $\pi R^2$. 
+```
+line_ak4 = ROOT.TLine(math.pi * 0.4**2, 0., math.pi * 0.4**2, frame.GetMaximum())
+line_ak4.SetLineWidth(2)
+line_ak4.SetLineStyle(2)
+line_ak4.SetLineColor(ROOT.kGray)
+line_ak4.Draw()
+
+line_ak8 = ROOT.TLine(math.pi * 0.8**2, 0., math.pi * 0.8**2, frame.GetMaximum())
+line_ak8.SetLineWidth(2)
+line_ak8.SetLineStyle(2)
+line_ak8.SetLineColor(ROOT.kGray)
+line_ak8.Draw()
+```
+</details>
 

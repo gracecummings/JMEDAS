@@ -45,15 +45,25 @@ Note that the histogram has two peaks, what do these correspond to? How do the a
 
 # Substructure Variables
 
-Now, let's compare the different subtructure variables between two different samples. Using the histograms that you created in the previous steps, the next script contains just a function to create comparison plots.
+Now, let's compare the different subtructure variables between two different samples. Using the histograms that you created in the previous steps, the script `compare_histograms.py contains a function to create comparison plots. Add the following line to `jet_substructure_part1.py:
+
+```
+from compare_histograms import compareHistogram
+```
 
 Let's start with n-subjetiness ratios. The variable $\tau_N$ gives a sense of how many N prongs or cores can be find inside the jet. It is known that the n-subjetiness variables itself ($\tau_{N}$) do not provide good discrimination power, but its ratios do. Then, a $\tau_{MN} = \dfrac{\tau_M}{\tau_N}$ basically tests if the jet is more M-prong compared to N-prong. For instance, we expect 2 prongs for boosted jets originated from hadronic Ws, while we expect 1 prongs for high-pt jets from QCD multijet processes.
 
-Let's compare one of the most common nsubjetiness ratio $\tau_{21}$. Run `compare_histograms.py` and open the resulting pdf:
+Let's compare one of the most common nsubjetiness ratio $\tau_{21}$. Add the following call to `jet_substructure_part1.py 
 
 ```
-python compare_histograms.py
-evince 
+compareHistogram('tau21AK8', processes=["rsg", "wqq", "qcd"])
+```
+
+and run it again
+
+```
+python jet_substructure_part1.py 
+evince tau21AK8.pdf
 ```
 
 What can you say about the two histograms? Is $\tau_{21}$ telling you something about the nature of the boosted jets selected?
@@ -149,7 +159,6 @@ Execute the following `jet_mass.py script in terminal and open the plot.
 
 ```
 python jet_mass.py
-evince 
 ```
 
 # Quiz
@@ -159,4 +168,4 @@ evince
 # Go Further
 
 * You can learn more about PUPPI from the pileup mitigation exercise.
-* We briefly mentioned that you can combine variables for even better discrimination. In CMS, we do this to build some of our jet taggers. For the simple taggers, we often combine cuts on jet substructure variables and jet mass. The more sophisticated taggers, which are used more and more widely within CMS, use deep neural networks. To learn about building a machine learning tagger, check out the [machine learning short exercise](https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolCERN2020MLShortExercise)
+* We briefly mentioned that you can combine variables for even better discrimination. In CMS, we do this to build some of our jet taggers. For the simple taggers, we often combine cuts on jet substructure variables and jet mass. The more sophisticated taggers, which are used more and more widely within CMS, use deep neural networks. To learn about building a machine learning, check out Wednesday's HATS! [machine learning HATs](https://indico.cern.ch/event/1311559/)

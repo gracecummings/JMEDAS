@@ -79,11 +79,12 @@ python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_nanoAODtest.py
 Although JME generally recommends to use AK4 CHS and AK8 PUPPI jets for Run II analyses (moving fully to AK4 PUPPI jets for Run III), there are cases where certain analysis will need to use something else. Similar for the standard algorithms stored in mini/nanoAOD samples. For users who want to test a different jet collection or algorithms, JetMET had developed a user-friendly tool to compute them: [JetToolbox](https://twiki.cern.ch/twiki/bin/view/CMS/JetToolbox).
 
 The JetToolbox is *not* part of CMSSW because JME wants to have the freedom to incorporate and test as many tools as possible without these algorithms being part of any central samples or code. That is the reason that, in real life, you would need to clone the [JetToolbox repository](https://github.com/cms-jet/JetToolbox) inside your CMSSW src folder like this:
-~~
+
+```
 cd $CMSSW_BASE/src/
 git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_102X_v3
 scram b
-~~
+```
 
 In this tutorial, this step was done for you in the initial setup. _You do not need to do it now_. You can find more information about how to set up the JetToolbox in the [README.md](https://github.com/cms-jet/JetToolbox) of the github repository or in the [twiki](https://twiki.cern.ch/twiki/bin/view/CMS/JetToolbox).
 

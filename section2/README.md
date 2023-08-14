@@ -123,4 +123,4 @@ The x-axis is plotted as a function of $\mu$ as this is a true measurement of pi
 ![Zmumu_rho](../notebooks/files/Zmumu_rho.png)
 ![Zmumu_npv_nputruth](../notebooks/files/Zmumu_npv_nputruth.png)
 ![Zmumu_rho_nputruth](../notebooks/files/Zmumu_rho_nputruth.png)
-
+<img src="../files/Zmumu_rho_nputruth.png" alt="Zmumu_rho_nputruth" width="400px" style="float: right;" />

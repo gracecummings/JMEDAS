@@ -147,3 +147,58 @@ python jet_substructure_part1.py
 evince jet_substructure_part1.pdf
 ```
 
+The histogram should look roughly like this (but with added normalization):
+
+![jet grooming algo comparisons](../notebooks/files/ex5_rsg_jetmass.png)
+
+Note that the histogram has two peaks, what do these correspond to? How do the algorithms affect the relative size of the two populations?
+
+# Substructure Variables
+
+Now, let's compare the different subtructure variables between two different samples. Using the histograms that you created in the previous steps, the next script contains just a function to create comparison plots.
+
+Let's start with n-subjetiness ratios. The variable $\tau_N$ gives a sense of how many N prongs or cores can be find inside the jet. It is known that the n-subjetiness variables itself ($\tau_{N}$) do not provide good discrimination power, but its ratios do. Then, a $\tau_{MN} = \dfrac{\tau_M}{\tau_N}$ basically tests if the jet is more M-prong compared to N-prong. For instance, we expect 2 prongs for boosted jets originated from hadronic Ws, while we expect 1 prongs for high-pt jets from QCD multijet processes.
+
+Let's compare one of the most common nsubjetiness ratio $\tau_{21}$. Run `compare_histograms.py` and open the resulting pdf:
+
+```
+python compare_histograms.py
+evince 
+```
+
+What can you say about the two histograms? Is $\tau_{21}$ telling you something about the nature of the boosted jets selected?
+
+Let's compare now $\tau_{32}$. Modify the function call `compareHistogram('tau21AK8', processes=["rsg", "wqq", "qcd"])` in the script and produce plots with the two following configurations:
+
+```
+compareHistogram('tau32AK8', processes=["rsg", "qcd"])
+compareHistogram('tau32AK8_pt450', processes=["rsg", "qcd"])
+```
+
+What can you say about the two histograms? Is $\tau_{32}$ telling you something about the nature of the boosted jets selected?
+
+Another substructure variable commonly used is the energy correlation function $N2$. Similarly than $\tau_{21}$, $N2$ tests if the boosted jet is compatible with a 2-prong jet hypothesis. Let's compare now $N2$ and $N3$. Follow the above process with these:
+
+```
+compareHistogram( 'ak8_N2_beta1', processes=["rsg", "wqq", "qcd"] )
+compareHistogram( 'ak8_N3_beta1_pt450', processes=["rsg", "qcd"] )
+```
+
+What can you say about the two histograms? Are $N2$ and $N3$ telling you something about the nature of the boosted jets selected?
+
+# $\rho$ parameter
+A useful variable for massive, fat jets is the QCD scaling parameter $\rho$, defined as:
+
+$\rho=\log(m^2/(p_{\mathrm{T}}R)^2)$.
+
+(Sometimes $\rho$ is defined without the log). One useful feature of this variable is that QCD jet mass grows with $p_{\mathrm{T}}$, i.e. the two quantities are strongly correlated, while $\rho$ is much less correlated with $p_{\mathrm{T}}$.
+Repeat the above plotting process with these two function calls and open the plots:
+
+```
+compareHistogram( 'logrhoRatioAK8' )
+compareHistogram( 'rhoRatioAK8' )
+```
+The following two plots show what QCD events look like in different $p_{T}$ ranges. It's clear that the mass depends very strongly on $p_{T}$, while the $\rho$ shape is fairly constant vs. $p_{T}$ (ignoring $\rho<7$ or so, which is the non-perturbative region). Having a stable shape is useful when studying QCD across a wide $p_{T}$ range.
+
+![qcd pt mass](../notebooks/files/qcdpt_mass.png)
+![qcd pt rho](../notebooks/files/qcdpt_rho.png)

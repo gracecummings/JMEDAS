@@ -115,12 +115,12 @@ Question 1: How large do you expect the pileup weights to be? (No answer, just l
 Question 2: What variable should we use to bin the pile-up weights? Another way of asking this is what pileup variable can be measured in both data and MC and is fairly robust?
 
 <details>
-<summary>Show answer...</summary>
+<summary>Show answer... (pictures may be a hint)</summary>
 The x-axis is plotted as a function of $\mu$ as this is a true measurement of pileup (additional interactions) and not just some variable which is correlated with pileup. Other options might have been $N_{PV}$, which has an efficiency which is less than 100%, and $\rho$, which assumes that the pileup energy density is uniform. We also get different values of $\rho$ if we measure it for different regions in $\eta$ (i.e. $|\eta|<3$ or $|\eta|<5$).
+</details>
 
 ![Zmumu_npv](../notebooks/files/Zmumu_npv.png)
 ![Zmumu_rho](../notebooks/files/Zmumu_rho.png)
 ![Zmumu_npv_nputruth](../notebooks/files/Zmumu_npv_nputruth.png)
 ![Zmumu_rho_nputruth](../notebooks/files/Zmumu_rho_nputruth.png)
 
-</details>

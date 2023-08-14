@@ -8,7 +8,14 @@ This preliminary exercise will illustrate some of the basic properties of jets i
 python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/ttjets2023.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets.root --maxevents=2000 --maxjets=6 --maxFiles 2
 ```
 
-Now let's plot the resulting histograms. Take a look at the simple plotting script below and execute it with
+Now let's plot the resulting histograms. Make sure you are on the correct git branch:
+
+```
+git status
+git checkout HATS2023
+```
+
+Take a look at the simple plotting script below and execute it with
 
 ```
 cd section1
@@ -21,13 +28,13 @@ evince plots1.pdf&
 ```
 
 Your histograms from the script should look similar to the four plots shown below. What about AK8 jets? Add the corresponding histograms to the same canvases, they are already filled and available (draw option 'same', line color 'ROOT.kRed').
-Open basics.py with a code editor, such as gedit, emacs, nano or vim, add the needed lines for AK8 and reproduce the plots.
+Open basics.py with a code editor, such as gedit, emacs, nano or vim, add the needed lines for AK8 and reproduce the plots. Why do they look different? Is it expected?
 
 ![Basic jet kinematics](../notebooks/files/plots1.png)
 
 ## Jet Types
 
-The jet algorithms take as input a set of 4-vectors. At CMS, the most popular jet type is the "Particle Flow Jet", which attempts to use the entire detector at once and derive single four-vectors representing specific particles.For this reason it is very comparable (ideally) to clustering generator-level four-vectors also.
+The jet algorithms take as input a set of 4-vectors. At CMS, the most popular jet type is the "Particle Flow Jet", which attempts to use the entire detector at once and derive single four-vectors representing specific particles. For this reason it is very comparable (ideally) to clustering generator-level four-vectors also.
 
 ### Particle Flow Jets (PFJets)
 

@@ -68,3 +68,35 @@ Question 1: Why are there a different amount of pileup interactions than primary
 <summary>Show answer...</summary>
 There is a vertex finding efficiency, which in Run I was about 72%. This means that $N_{PV}\simeq0.72{\cdot}N_{PU}$
 </details>
+
+Question 2: How many pileup interactions are simulated before and after the in-time bunch crossing?
+
+<details>
+<summary>Hint</summary>
+Open the file on the ROOT command line, and scan the tree with 
+
+```
+t.Scan("bxns:tnpu:npu")
+````
+</details>
+
+<details>
+<summary>Show answer...</summary>
+There are 12 interactions before and 3 after.
+</details>
+
+Question 3: Rho is the measure of the density of the pileup in the event. It's measured in terms of GeV per unit area. Can you think of ways we can use this information the correct for the effects of pileup?
+
+<details>
+<summary>Show answer...</summary>
+From the jet $p_{T}$ simply subtract off the average amount of pileup expected in a jet of that size. Thus $p_{T}^{corr}{\simeq}p_{T}^{reco}-\rho{\cdot}area$
+</details>
+
+Question 4: This plot shows the jet composition. Generally, why do we see the mixture of photons, neutral hadrons and charged hadrons that we see?
+
+![Jet Composition Vs. Pt](../notebooks/files/composition_combo_pt_pfpaper_final_v2.png)
+
+<details>
+<summary>Show answer...</summary>
+A majority of the constituents in a jet come from pions. Pions come in neutral ($\pi^{0}$) and charged ($\pi^{\pm}$) varieties. Naively you would expect the composition to be two thirds charged hadrons and one third neutral hadrons. However, we know that $\pi^{0}$ decays to two photons, which leads to a large photon fraction.
+</details>

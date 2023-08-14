@@ -88,3 +88,62 @@ scram b
 
 In this tutorial, this step was done for you in the initial setup. _You do not need to do it now_. You can find more information about how to set up the JetToolbox in the [README.md](https://github.com/cms-jet/JetToolbox) of the github repository or in the [twiki](https://twiki.cern.ch/twiki/bin/view/CMS/JetToolbox).
 
+# Jet Substructure
+
+Because boosted jets represent the hadronic products of a heavy particle produced with high momentum, some tools have been developed to study the internal structure of these jets. This topic is usually called Jet Substructure. 
+
+Jet substructure algorithms can be divided into three main tools:
+ * **grooming algorithms** attempt to reduce the impact of *soft* contributions to clustering sequence by adding some other criteria. Examples of these algorimths are softdrop, trimming, pruning.
+ * **subtructure variables** are observables that try to quantify how many cores or prongs can be identify within the structure of the boosted jet. Examples of these variables are n-subjetiness or energy correlation functions.
+ * **taggers** are more sofisticated algorithms that attempt to identify the origin of the boosted jet. Currently taggers are based on sofisticated machine-learning techniques which try to use as much information as possible in order to efficiency identify boosted W/Z/Higgs/top jets. Examples of these taggers in CMS are deepAK8/ParticleNet or deepDoubleB.
+ 
+For further reading, several measurements have been performed about jet substructure:
+ * [Studies of jet mass in dijet and W/Z+jet events](http://arxiv.org/abs/1303.4811) (CMS).
+ * [Jet mass and substructure of inclusive jets in sqrt(s) = 7 TeV pp collisions with the ATLAS experiment](http://arxiv.org/abs/1203.4606) (ATLAS).
+ * [Theory slides](http://www.hri.res.in/~sangam/sangam18/talks/Marzani-2.pdf) 
+ * [More theory slides]( http://indico.hep.manchester.ac.uk/getFile.py/access?contribId=14&resId=0&materialId=slides&confId=4413)
+ * [Talk from Phil Harris](https://web.pa.msu.edu/seminars/hep_seminars/abstracts/2018/Harris-HEPSeminar-Slides-4172018.pdf) on searching for boosted $W$ bosons.
+ 
+In this part of the tutorial, we will compare different subtructure algorithms as well as some usually subtructure variables.
+
+The code we will use `$CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py` is a python-based script accessing miniAOD information. We used it in the previous exercise.
+
+The code will take several minutes to run, so you can launch the script first, and read the script while the code is running. To run, execute the following:
+
+```
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py 
+    --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_ttbar_3000GeV.txt 
+    --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_ttbar_3000GeV.root 
+    --maxevents=2000 
+    --maxFiles 1 
+    --maxjets=6
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py 
+    --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/ttjets.txt 
+    --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets.root 
+    --maxevents=2000 
+    --maxjets=6 
+    --maxFiles 5
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py 
+    --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/WJetsToQQ_HT600to800.txt 
+    --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/WJetsToQQ_HT600to800.root 
+    --maxevents=2000 
+    --maxjets=4 
+    --maxFiles 2 
+    --matchPdgIdAK8 24 0.8    
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py 
+    --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/QCD_Pt_470to600.txt 
+    --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/QCD_Pt_470to600.root 
+    --maxevents=2000 
+    --maxjets=4 
+    --maxFiles 2
+```
+
+## Grooming and PU removal algorithms
+
+Now, let's compare the jet masses for ungroomed, pruned, soft drop (SD), PUPPI, and SD+PUPPI.
+
+```
+python jet_substructure_part1.py
+evince jet_substructure_part1.pdf
+```
+

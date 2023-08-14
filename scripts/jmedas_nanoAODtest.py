@@ -7,7 +7,7 @@ from ROOT import *
 ROOT.gROOT.SetBatch(True)
 sys.argv = oldargv
 
-inputFile = TFile.Open('root://xrootd-cms.infn.it//store/mc/RunIIAutumn18NanoAODv4/QCD_HT1000to1500_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/Nano14Dec2018_102X_upgrade2018_realistic_v16-v1/110000/C23F77AA-3909-C74E-ADCD-8266FF68AB5D.root' )
+inputFile = TFile.Open('root://xrootd-cms.infn.it//store/mc/RunIISummer20UL18NanoAODv9/QCD_HT1000to1500_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v1/60000/A7D190CE-A78E-B14B-80E0-0565DF0D87BA.root' )
 events = inputFile.Get('Events')
 
 for iev in xrange(events.GetEntries()):

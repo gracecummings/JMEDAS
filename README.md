@@ -41,7 +41,7 @@ echo "PS1='\W\$ '" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Now you can go back to the TWiki page and start with the basics in Section 1.
+Now you can go back onto [Exercise 1: Basic Jets](https://github.com/gracecummings/JMEDAS/tree/HATS2023/section1).
 
 ## Additional Information & Resources
 

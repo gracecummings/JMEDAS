@@ -11,7 +11,7 @@ ROOT.gROOT.SetBatch(True)
 # Imports for running locally
 sys.path.append(os.path.expandvars("$CMSSW_BASE/src/Analysis/JMEDAS/python"))
 
-f = ROOT.TFile("$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets.root")
+f = ROOT.TFile("$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets2023.root")
 
 h_ptAK4   = f.Get("h_ptAK4")
 h_etaAK4  = f.Get("h_etaAK4")

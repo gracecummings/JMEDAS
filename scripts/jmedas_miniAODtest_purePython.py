@@ -21,7 +21,7 @@ verticesScore = Handle("edm::ValueMap<float>")
 seenIt = {} # list of things we've seen (so that we dump them in full only once)
 
 # open file (you can use 'edmFileUtil -d /store/whatever.root' to get the physical file name)
-events = Events('root://cms-xrd-global.cern.ch//store/mc/RunIIAutumn18MiniAOD/QCD_HT1000to1500_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/102X_upgrade2018_realistic_v15-v1/210000/DA20DC21-E781-C540-9FCD-7BCF2144CA4E.root' )
+events = Events('root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL18MiniAODv2/QCD_HT1000to1500_TuneCP5_13TeV-madgraphMLM-pythia8/MINIAODSIM/106X_upgrade2018_realistic_v16_L1v1-v2/50000/60FABBC4-D5AD-2142-9BC4-03C1D7DB6D7F.root' )
 
 for iev,event in enumerate(events):
     if iev >= 10: break

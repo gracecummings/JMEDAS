@@ -21,7 +21,7 @@ The code we will use `$CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histog
 The code will take several minutes to run, so you can launch the script first, and read the script while the code is running. To run, execute the following:
 
 ```
-python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_ttbar_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_ttbar_3000GeV.roo --maxevents=2000 --maxFiles 1 --maxjets=6
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_ttbar_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_ttbar_3000GeV.root --maxevents=2000 --maxFiles 1 --maxjets=6
 python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/ttjets.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets.root --maxevents=2000 --maxjets=6 --maxFiles 5
 python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/WJetsToQQ_HT600to800.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/WJetsToQQ_HT600to800.root --maxevents=2000 --maxjets=4 --maxFiles 2 --matchPdgIdAK8 24 0.8    
 python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/QCD_Pt_470to600.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/QCD_Pt_470to600.root --maxevents=2000 --maxjets=4 --maxFiles 2

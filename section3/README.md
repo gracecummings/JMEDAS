@@ -74,3 +74,63 @@ Now run the script `JEC_uncertainty.py` to plot a comparison of the nominal and 
 Why do we need to calibrate jet energy? Why is "jet response" not equal to 1? Can you think of a physics process in nature that can help us calibrate the jet response to 1?
 
 The amount of material in front of the CMS calorimeter varies by $\eta$. Therefore, the calorimeter response to jet is also a function of jet $\eta$. Can you think of a physics process in nature that can help us calibrate the jet response in $\eta$ to be uniform?
+
+# Jet Energy Resolution
+
+Jets are stochastic objects. The content of jets fluctuates quite a lot, and the content also depends on what actually caused the jet (uds quarks, gluons, etc). In addition, there are experimental limitations to the measurement of jets. Both of these aspects limit the accuracy to which we can measure the 4-momentum of a jet. The way to quantify our accuracy of measuring jet energy is called the jet energy resolution (JER). If you have a group of single pions that have the same energy, the energy measured by CMS will not be exactly the same every time, but will typically follow a (roughly) Gaussian distribution with a mean and a width. The mean is corrected using the jet energy corrections. It is impossible to "correct" for all resolution effects on a jet-by-jet basis, although regression techniques can account for many effects.
+
+As such, there will always be some experimental and theoretical uncertainty in the jet energy measurement, and this is seen as non-zero jet energy resolution. There is also other jet-related resolutions such as jet angular resolution and jet mass resolution, but JER is what we most often have to deal with.
+Jets measured from data have typically worse resolution than simulated jets. Because of this, it is important to 'smear' the MC jets with jet energy resolution (JER) scale factors, so that measured and simulated jets are on equal footing in analyses. We will demonstrate how to apply the JER scale factors, since that is applicable for all analyses that use jets. More information can be found at the jet resolution twiki and jet resolution software guide. The resolution is measured in data for different eta bins, and was approximately 10% with a 10% uncertainty for 7 TeV and 8 TeV data. For precision, it is important to use the correctly measured resolutions, but a reasonable calculation is to assume a flat 10% uncertainty for simplicity.
+
+To perform this on `pat::Jets` in MC miniAOD, the syntax is:
+
+```
+smear = getJER(jet.eta(), 0) #JER nominal=0, up=+1, down=-1
+smearUp = getJER(jet.eta(), 1) #JER nominal=0, up=+1, down=-1
+smearDn = getJER(jet.eta(), -1) #JER nominal=0, up=+1, down=-1
+recopt = jet.pt()
+genpt = genJet.pt()
+deltapt = (recopt-genpt)*(smear-1.0)
+deltaptUp = (recopt-genpt)*(smearUp-1.0)
+deltaptDn = (recopt-genpt)*(smearDn-1.0)
+ptsmear = max(0.0, (recopt+deltapt)/recopt)
+ptsmearUp = max(0.0, (recopt+deltaptUp)/recopt)
+ptsmearDn = max(0.0, (recopt+deltaptDn)/recopt)
+corr *= ptsmear
+corrUp *= ptsmearUp
+corrDn *= ptsmearDn
+```
+
+You can see that the smearing scales the difference between the reconstructed and truth-level jet $p_{\mathrm{T}}$s. The smearing value is taken from the function `getJER()`. 
+
+Run the below command in cmslpc to create histograms with the JER smearing applied. As usual, open `jmedas_make_histograms.py` again, and understand what the `getJER()` function does.  
+
+```
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/ttjets2023.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets_corr_smear.root --maxevents=2000 --maxFiles 10 --maxjets=2 --correctJets Fall17_17Nov2017_V32_MC --smearJets
+```
+
+Next, let's make plots of the output with
+
+```
+python JER_part1.py
+```
+
+and then open the resulting pdf. In our example, which has a larger effect: jet energy correction uncertainty, or jet energy resolution uncertainty?
+
+## Dijet resonance peaks
+As a final exercise for the first part of this exercise, let's look at a simple dijet resonance peak. The following cell will produce histograms from an MC sample of Randall-Sundrum gravitons (RSGs) with m=3 TeV decaying to two quarks. The resulting signature is two high-$p_{\mathrm{T}}$ jets, with a truth-level invariant mass of 3 TeV. 
+
+Execute the below commands in terminal and while the code is running, look at the script (scripts/jmedas_dijet.py). Hint: you can execute all the processes at once by copy-pasteing all rows from the below script box at once. Be patient, this takes a while.
+
+```
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_dijet.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_qq_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_qq_3000GeV.root --maxevents=4000 --maxjets=6
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_dijet.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_qq_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_qq_3000GeV_corr.root --maxevents=4000 --maxjets=6 --correctJets Fall17_17Nov2017_V32_MC
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_dijet.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_qq_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_qq_3000GeV_smear.root --maxevents=4000 --maxjets=6 --smearJets
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_dijet.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_qq_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_qq_3000GeV_corr_smear.root --maxevents=4000 --maxjets=6 --correctJets Fall17_17Nov2017_V32_MC --smearJets
+```
+
+When the above running is done, plot the output with
+
+```
+python JER_part2.py
+```

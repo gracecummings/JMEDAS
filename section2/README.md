@@ -64,6 +64,7 @@ evince pileup.pdf&
 
 Question 1: Why are there a different amount of pileup interactions than primary vertices?
 
-<summary><font color='blue'>Show answer...</font></summary>
+<details>
+<summary>Show answer...</summary>
 There is a vertex finding efficiency, which in Run I was about 72%. This means that $N_{PV}\simeq0.72{\cdot}N_{PU}$
 </details>

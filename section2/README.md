@@ -100,3 +100,27 @@ Question 4: This plot shows the jet composition. Generally, why do we see the mi
 <summary>Show answer...</summary>
 A majority of the constituents in a jet come from pions. Pions come in neutral ($\pi^{0}$) and charged ($\pi^{\pm}$) varieties. Naively you would expect the composition to be two thirds charged hadrons and one third neutral hadrons. However, we know that $\pi^{0}$ decays to two photons, which leads to a large photon fraction.
 </details>
+
+# Pileup Reweighting 
+Here we are going to produce a file containing the weights used for pileup reweighting. Please note that this process can take quite a while. Execute the following command in your ssh session and be patient!
+
+```
+python $CMSSW_BASE/src/Analysis/JMEDAS/python/pileupCorr.py -j $CMSSW_BASE/src/Analysis/JMEDAS/data/Cert_271036-284044_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt -l $CMSSW_BASE/src/Analysis/JMEDAS/data/pileup_latest.txt -b 100
+```
+
+In the meantime, the first question is asked here, at the beginning of this section, in order to give you a chance to think about the answers before you produce the plots. Ask yourself what pileup reweighting is doing. Try to answer the questions and do the exercise before looking at the answer.
+
+Question 1: How large do you expect the pileup weights to be? (No answer, just let's talk about it)
+
+Question 2: What variable should we use to bin the pile-up weights? Another way of asking this is what pileup variable can be measured in both data and MC and is fairly robust?
+
+<details>
+<summary>Show answer...</summary>
+The x-axis is plotted as a function of $\mu$ as this is a true measurement of pileup (additional interactions) and not just some variable which is correlated with pileup. Other options might have been $N_{PV}$, which has an efficiency which is less than 100%, and $\rho$, which assumes that the pileup energy density is uniform. We also get different values of $\rho$ if we measure it for different regions in $\eta$ (i.e. $|\eta|<3$ or $|\eta|<5$).
+
+![Zmumu_npv](../notebooks/files/Zmumu_npv.png)
+![Zmumu_rho](../notebooks/files/Zmumu_rho.png)
+![Zmumu_npv_nputruth](../notebooks/files/Zmumu_npv_nputruth.png)
+![Zmumu_rho_nputruth](../notebooks/files/Zmumu_rho_nputruth.png)
+
+</details>

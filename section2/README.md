@@ -123,4 +123,22 @@ The x-axis is plotted as a function of $\mu$ as this is a true measurement of pi
 ![Zmumu_rho](../notebooks/files/Zmumu_rho.png)
 ![Zmumu_npv_nputruth](../notebooks/files/Zmumu_npv_nputruth.png)
 ![Zmumu_rho_nputruth](../notebooks/files/Zmumu_rho_nputruth.png)
-<img src="../files/Zmumu_rho_nputruth.png" alt="Zmumu_rho_nputruth" width="400px" style="float: right;" />
+
+While you're waiting for pileupCorr.py to finish, you might want to take a look at the input files to see what information they contain and how they are formatted.
+
+Once the process is finished, execute the simple plotting script below and open the produced pdf.
+
+```
+python pileup_reweighting.py
+```
+Question 3: Did the weights look as you expected them to?
+
+Question 4: Why do the green and red histograms end arount $\mu\approx38$??
+
+Question 5: What is the limiting factor on the black histogram? Why doesn't it continue to higher $\mu$ values?
+
+Question 6: Did the method close? In other words, can we derive weights from the pileup distribution in a given MC sample, apply those weights to the same MC sample, and get back a distribution that looks just like data?
+
+Take a look at the MakeCanvas function in the pileupCorr module to see how this plot is made. This will help you to understand how to apply the pileup weights in your own analysis. You can also take a look at the other modules in the pileupCorr.py code to see how the pileup weights, and their associated systematics, are created.
+
+More information about pileup reweighting and the centrally available utilities can be found [here](https://twiki.cern.ch/twiki/bin/viewauth/CMS/PileupJSONFileforData).

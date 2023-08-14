@@ -7,7 +7,7 @@ This preliminary exercise will illustrate some of the basic properties of jets i
 ```
 python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/ttjets2023.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets.root --maxevents=2000 --maxjets=6 --maxFiles 2
 ```
-
+ 
 Now let's plot the resulting histograms. Make sure you are on the correct git branch:
 
 ```

@@ -202,3 +202,71 @@ The following two plots show what QCD events look like in different $p_{T}$ rang
 
 ![qcd pt mass](../notebooks/files/qcdpt_mass.png)
 ![qcd pt rho](../notebooks/files/qcdpt_rho.png)
+
+# W and top tagging
+
+In this part of the tutorial, we will look at how different substructure algorithms can be used to identify jets originating from boosted W's and tops. Specifically, we'll see how these identification tools are used to separate these boosted jets from those originating from Standard Model QCD, a dominant process at the LHC.
+
+Run the following commands to produce the relevant histogram files from the SM ttbar, RS KK gluon, and QCD samples. It may take a few minutes - go ahead a grab a coffee while it runs.
+
+```
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/ttjets.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/ttjets.root --maxevents=2000 --maxFiles 10 --maxjets=6
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/rsgluon_ttbar_3000GeV.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/rsgluon_ttbar_3TeV.root --maxevents=2000 --maxFiles 10 --maxjets=6
+python $CMSSW_BASE/src/Analysis/JMEDAS/scripts/jmedas_make_histograms.py --files=$CMSSW_BASE/src/Analysis/JMEDAS/data/MiniAODs/RunIIFall17MiniAODv2/QCD_Pt_300to470.txt --outname=$CMSSW_BASE/src/Analysis/JMEDAS/notebooks/files/QCD_Pt_300to470.root --maxevents=2000 --maxFiles 10 --maxjets=6
+```
+
+## W Tagging
+
+We will now investigate how to identify W bosons using the substructure techniques we've learned. 
+
+Compare the tau2 / tau1 ratio for the AK8 jets from Standard Model top quarks to those from the QCD sample using the below script `W_tagging_part1.py.
+
+```
+python W_tagging_part1.py
+```
+
+Now compare with the energy correlation function, N2b1, with `W_tagging_part2.py:
+
+```
+python  W_tagging_part2.py
+```
+
+### Quiz
+
+* Why can we use a ttbar sample to talk about W-tagging? (Hint: look at the two peaks in the jet mass plots later in the exercise.)
+* What cuts would you place on these variables to distinguish W bosons from QCD?
+* So far, which variable looks more promising?
+
+# Top Tagging
+
+We will now investigate how to identify top quarks using the substructure techniques we've learned.
+
+Compare the tau3/ tau2 ratio for the boosted top quarks from the RS KK gluon sample, and the jets from the QCD sample using the `T_tagging_part1.py script.
+
+```
+python T_tagging_part1.py
+```
+
+### Quiz
+
+* What cut would you apply to select boosted top quarks?
+* For both the W and top selections, what other variable(s) could we cut on in addition?
+
+# Jet Mass
+
+We can also use jet mass to distinguish our boosted W and top jets from QCD. Let's compare the AK8 jet mass of the boosted top quarks from the RS KK sample and the jets from the QCD sample. Let's also look at the ungroomed jet mass (labeled as CHS) and the softdrop groomed jet mass combined with the PUPPI pileup subtraction algorithm.
+Execute the following `jet_mass.py script in terminal and open the plot.
+
+```
+python jet_mass.py
+evince 
+```
+
+# Quiz
+
+* Which does better at separating the QCD from both the top and W mass peaks - CHS or softdrop + PUPPI?
+
+# Go Further
+
+* You can learn more about PUPPI from the pileup mitigation exercise.
+* We briefly mentioned that you can combine variables for even better discrimination. In CMS, we do this to build some of our jet taggers. For the simple taggers, we often combine cuts on jet substructure variables and jet mass. The more sophisticated taggers, which are used more and more widely within CMS, use deep neural networks. To learn about building a machine learning tagger, check out the [machine learning short exercise](https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolCERN2020MLShortExercise)
